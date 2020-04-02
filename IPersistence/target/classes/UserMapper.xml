@@ -1,0 +1,23 @@
+<mapper namespace="user">
+    <!--sql唯一标识:由namespace.id来组成: statementId-->
+    <!--因为返回结果集之前说的很麻烦,通过反射来获取,反射需要全路径,所以有了resultType相关值的设置-->
+    <select id="selectList" resultType="com.lagou.pojo.User">
+        select * from user
+    </select>
+    <!--paramterType入参也是通过反射来实现,所以需要全路径-->
+    <select id="selectOne" resultType="com.lagou.pojo.User" paramterType="com.lagou.pojo.User">
+        select * from user where id = #{id} and username = #{username}
+    </select>
+    <insert id="insert" resultType="java.lang.Integer" paramterType="com.lagou.pojo.User">
+        INSERT INTO user(username)
+        VALUES (#{username})
+    </insert>
+
+    <update id="update" resultType="java.lang.Integer" paramterType="com.lagou.pojo.User">
+        update user set username = #{username} where id =#{id}
+    </update>
+
+    <delete id="delete" resultType="java.lang.Integer" paramterType="java.lang.Long">
+        delete from user where id =#{id}
+    </delete>
+</mapper>
